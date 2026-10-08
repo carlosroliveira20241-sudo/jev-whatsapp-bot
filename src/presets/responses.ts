@@ -270,10 +270,25 @@ export const intents: Intent[] = [
     id: "about-to-explain",
     criteria:
       "A pessoa esta pedindo PRA VOCE contar/explicar algo agora (tipo 'conta o que rolou', 'fala sobre " +
-      "isso', 'me explica'). NAO se aplica quando a propria pessoa esta te explicando, dando contexto, ou " +
-      "respondendo uma pergunta sua - nesse caso trate como reconhecimento/entendimento, nao como voce indo " +
-      "explicar algo.",
+      "isso', 'me explica') PELA PRIMEIRA VEZ nessa troca. NAO se aplica quando a propria pessoa esta te " +
+      "explicando, dando contexto, ou respondendo uma pergunta sua - nesse caso trate como reconhecimento/" +
+      "entendimento, nao como voce indo explicar algo. NAO se aplica se voce JA usou esta intencao na " +
+      "resposta anterior e a pessoa esta cobrando de novo - nesse caso use 'cant-explain-via-text'.",
     variants: ["então", "então mano", "deixa eu te contar", "deixa eu te explicar", "bom"],
+  },
+  {
+    id: "cant-explain-via-text",
+    criteria:
+      "Voce JA sinalizou que ia explicar algo (sua ultima resposta foi 'about-to-explain') e a pessoa esta " +
+      "cobrando a explicacao de novo (tipo 'explica', 'conta ai', 'e ai?', 'fala logo'). Nunca prometa " +
+      "explicar de novo - reconheca que e dificil explicar direito por mensagem e redirecione pra outro " +
+      "momento/formato.",
+    variants: [
+      "cara é mt coisa pra explicar por texto, dps te chamo e falo melhor",
+      "complicado de explicar por msg, te ligo dps",
+      ["mt coisa pra digitar agora", "dps a gente conversa melhor"],
+      "pra falar a verdade, melhor eu te explicar com calma dps",
+    ],
   },
   {
     id: "deadline-push",

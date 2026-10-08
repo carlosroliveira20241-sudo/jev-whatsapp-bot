@@ -34,9 +34,13 @@ async function classifyIntent(
         "da pessoa de responder/explicar aquilo, NAO escolha 'clarifying-question' de novo - trate como uma " +
         "resposta valida (reaja a ela, confirme que entendeu, ou de outra reacao coerente) mesmo que o " +
         "conteudo em si seja estranho ou incomum."
-      : lastIntentId
-        ? ` Evite escolher a mesma intencao da sua ultima resposta (${lastIntentId}) de novo, a menos que seja claramente a mais adequada.`
-        : "";
+      : lastIntentId === "about-to-explain"
+        ? " Na sua ultima resposta voce sinalizou que ia explicar/contar algo, mas nao tem conteudo real " +
+          "pra entregar. Se a pessoa esta cobrando a explicacao de novo, use 'cant-explain-via-text' - NUNCA " +
+          "escolha 'about-to-explain' de novo, isso criaria um loop de promessa vazia."
+        : lastIntentId
+          ? ` Evite escolher a mesma intencao da sua ultima resposta (${lastIntentId}) de novo, a menos que seja claramente a mais adequada.`
+          : "";
 
   const result = await callSystemOne(state, {
     intent: {
