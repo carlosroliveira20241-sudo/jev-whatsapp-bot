@@ -33,13 +33,30 @@ export const intents: Intent[] = [
     id: "how-are-you",
     criteria:
       "A pessoa esta perguntando casualmente como voce esta ou se esta tranquilo/de boa - uma saudacao " +
-      "de bem-estar generica, SEM pedir detalhe especifico sobre o que voce fez ou como foi seu dia.",
+      "de bem-estar generica, SEM pedir detalhe especifico sobre o que voce fez ou como foi seu dia. " +
+      "NAO se aplica se a MENSAGEM ATUAL ja responde a UMA PERGUNTA SUA anterior (ex: voce perguntou " +
+      "'tudo bem?' e a pessoa respondeu 'tudo bem, e vc?') - isso e 'wellbeing-reciprocated'.",
     variants: [
       "tudo certo sim, e vc?",
       "de boa, e vc?",
       "tudo indo, e vc?",
       ["tudo certo", "e vc, tudo bem?"],
       "tranquilo por aqui, e contigo?",
+    ],
+  },
+  {
+    id: "wellbeing-reciprocated",
+    criteria:
+      "Na sua ULTIMA mensagem voce perguntou algo tipo 'tudo bem?'/'tranquilo?'/'e vc?' sobre o estado da " +
+      "pessoa, e a MENSAGEM ATUAL responde isso E tambem devolve a pergunta pra voce (ex: 'tudo bem sim e " +
+      "vc?'). A troca ja foi reciproca uma vez - responda seu proprio estado SEM perguntar 'e vc?' de novo, " +
+      "pra nao criar um loop de pergunta repetida.",
+    variants: [
+      "tudo certo tbm",
+      "de boa aqui tbm",
+      ["tudo bem sim", "nada de novo por aqui"],
+      "tranquilo tbm, na correria normal",
+      "de boa, sem novidade",
     ],
   },
   {
