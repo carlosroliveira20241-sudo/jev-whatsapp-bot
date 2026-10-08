@@ -31,13 +31,31 @@ export const intents: Intent[] = [
   },
   {
     id: "how-are-you",
-    criteria: "A pessoa esta perguntando como voce esta, como foi seu dia, se esta tranquilo/de boa.",
+    criteria:
+      "A pessoa esta perguntando casualmente como voce esta ou se esta tranquilo/de boa - uma saudacao " +
+      "de bem-estar generica, SEM pedir detalhe especifico sobre o que voce fez ou como foi seu dia.",
     variants: [
       "tudo certo sim, e vc?",
       "de boa, e vc?",
       "tudo indo, e vc?",
       ["tudo certo", "e vc, tudo bem?"],
       "tranquilo por aqui, e contigo?",
+    ],
+  },
+  {
+    id: "day-detail-request",
+    criteria:
+      "A pessoa esta pedindo especificamente que voce CONTE MAIS sobre seu dia, o que fez, como foi - " +
+      "nao so um 'tudo bem' casual, mas pedindo pra voce elaborar/detalhar.",
+    variants: [
+      "foi corrido, fiquei enrolado em aula o dia inteiro",
+      ["foi tranquilo", "só fiquei resolvendo um trampo aqui de boa"],
+      "nada de especial não, rotina normal mesmo",
+      ["bem puxado hoje", "tive que resolver um perrengue de manha mas deu certo"],
+      "foi de boa, só estudando pra uma prova",
+      ["foi corrido pra caramba", "mal tive tempo de almoçar direito kkkk"],
+      "mais ou menos, uma correria normal de sempre",
+      ["nada muito diferente não", "trampo, estudo, a rotina de sempre"],
     ],
   },
   {
@@ -78,17 +96,23 @@ export const intents: Intent[] = [
   {
     id: "thanks",
     criteria: "A pessoa esta agradecendo, se despedindo, ou desejando algo bom.",
-    variants: ["vlw mano", "blz, falou", "tmj", "vlw man", "de nada mano"],
+    variants: ["vlw mano", "blz, falou", "tmj", "vlw man", "de nada mano", "dnd, qq coisa chama", "vlw, até"],
   },
   {
     id: "apology",
     criteria: "Voce precisa se desculpar por um erro, mensagem errada, ou atraso.",
-    variants: ["foi mal mano", "perdão, mandei errado", ["foi mal", "foi sem querer"], "foi mal, me confundi aqui"],
+    variants: [
+      "foi mal mano",
+      "perdão, mandei errado",
+      ["foi mal", "foi sem querer"],
+      "foi mal, me confundi aqui",
+      "foi mal, besteira minha",
+    ],
   },
   {
     id: "clarifying-question",
     criteria: "A mensagem recebida ficou confusa, ambigua, ou faltou contexto pra entender o que a pessoa quer.",
-    variants: ["qual?", "como assim?", "oq exatamente?", "n entendi bem, pode explicar melhor?"],
+    variants: ["qual?", "como assim?", "oq exatamente?", "n entendi bem, pode explicar melhor?", "ué, oq?", "n saquei, explica de novo?"],
   },
   {
     id: "unknown-specific",
@@ -100,6 +124,8 @@ export const intents: Intent[] = [
       ["hmm", "não lembro disso agora não"],
       "essa eu não sabia te dizer agora",
       "não sei se consigo te dizer com certeza não",
+      "boa pergunta, não faço ideia",
+      "pqp n sei não kkkk",
     ],
   },
   {
@@ -110,12 +136,13 @@ export const intents: Intent[] = [
       "foi mal, tive que parar pra resolver uma parada aqui",
       ["foi mal", "tive que resolver uma parada"],
       "voltando",
+      "pera ai, surgiu um perrengue aqui",
     ],
   },
   {
     id: "about-to-explain",
     criteria: "Voce esta prestes a comecar a explicar ou contar algo em detalhe.",
-    variants: ["então", "então mano", "deixa eu te contar", "deixa eu te explicar"],
+    variants: ["então", "então mano", "deixa eu te contar", "deixa eu te explicar", "bom"],
   },
   {
     id: "reassurance",
@@ -127,6 +154,23 @@ export const intents: Intent[] = [
       "to bem sim, pq?",
       "tranquilo, só correria aqui",
       ["relaxa", "to de boa só meio corrido hoje"],
+    ],
+  },
+  {
+    id: "called-out-for-dodging",
+    criteria:
+      "A MENSAGEM RECEBIDA AGORA (nao mensagens anteriores) reclama diretamente e explicitamente que voce " +
+      "esta repetindo a mesma coisa, evitando responder, ou nao respondeu o que foi perguntado - precisa ter " +
+      "palavras tipo 'repetindo', 'nao respondeu', 'nao foi isso', 'de novo' na mensagem atual. NAO use esta " +
+      "intencao so porque mensagens anteriores na conversa tinham esse clima - a mensagem atual em si precisa " +
+      "conter a reclamacao. Uma pergunta nova e diferente (tipo perguntar se voce e um bot) nunca e isso, " +
+      "mesmo que venha logo depois de uma reclamacao.",
+    variants: [
+      "kkkk foi mal, acho que enrolei",
+      "ata verdade, foi mal, não tive um dia muito diferente do normal não",
+      ["foi mal", "slk, viajei aqui"],
+      "pqp foi mal mesmo, me distraí aqui",
+      ["verdade, foi mal", "nem percebi que fiquei repetindo"],
     ],
   },
   {

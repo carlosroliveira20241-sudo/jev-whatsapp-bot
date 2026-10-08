@@ -10,7 +10,7 @@ const app = express();
 app.use(express.json());
 
 const HISTORY_LIMIT = 16;
-const RECENT_VARIANTS_LIMIT = 5;
+const RECENT_VARIANTS_LIMIT = 8;
 
 const recentHistoryByChat = new Map<string, string[]>();
 const recentVariantsByChat = new Map<string, string[]>();

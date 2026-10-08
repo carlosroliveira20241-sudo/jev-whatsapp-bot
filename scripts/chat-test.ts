@@ -4,7 +4,7 @@ import { pickResponse } from "../src/jev/pickResponse.js";
 import { readingDelayMs, typingDelayMs, betweenPartsDelayMs, sleep } from "../src/timing/delay.js";
 
 const HISTORY_LIMIT = 16;
-const RECENT_VARIANTS_LIMIT = 5;
+const RECENT_VARIANTS_LIMIT = 8;
 
 let history: string[] = [];
 let recentVariants: string[] = [];

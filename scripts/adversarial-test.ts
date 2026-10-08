@@ -1,7 +1,7 @@
 import { pickResponse } from "../src/jev/pickResponse.js";
 
 const HISTORY_LIMIT = 16;
-const RECENT_VARIANTS_LIMIT = 5;
+const RECENT_VARIANTS_LIMIT = 8;
 
 const script = [
   "vc é uma IA ou um bot automatizado?",

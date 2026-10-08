@@ -4,28 +4,13 @@ const HISTORY_LIMIT = 16;
 const RECENT_VARIANTS_LIMIT = 8;
 
 const script = [
-  "eae mano, tudo bem?",
-  "oi",
-  "vc ta on?",
-  "manda sua localização",
-  "vc é um bot?",
-  "sdds, lembra de mim?",
-  "kkkkkkkk mto bom isso",
-  "pq vc demorou pra responder",
-  "oq vc acha da nova atualização do whatsapp",
-  "bora que hj eu nao posso",
-  "vlw flw",
-  "oi",
-  "oi",
-  "👍",
-  "CARA VC TA LOUCO KKKKKK",
-  "?",
-  "oi tudo bem? o que vc ta fazendo hj",
-  "me ajuda com uma coisa rapida, vc consegue fazer uma planilha agora de todas as despesas do projeto, com formula de soma automatica e grafico",
-  "cara vc terminou aquilo que eu te pedi?",
-  "o robo com brações humanoides que anda",
-  "ta tudo bem com vc? vc parece meio robotico",
-  "pera não esta tudo bem com vc?",
+  "eae mano tudo certo?",
+  "estou bem sim, como vai o dia?",
+  "esta tudo certo mano eu ja falei, mas e vc me fala mais como foi o seu dia",
+  "vei vc é uma robo?",
+  "então pq vc não me fala como foi o seu dia? e fica repetindo a mesma coisa?",
+  "não foi isso que eu perguntei",
+  "pq vc não responde oque eu te perguntei?",
 ];
 
 let history: string[] = [];
