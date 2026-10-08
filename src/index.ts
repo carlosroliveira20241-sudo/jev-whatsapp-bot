@@ -14,6 +14,7 @@ const RECENT_VARIANTS_LIMIT = 5;
 
 const recentHistoryByChat = new Map<string, string[]>();
 const recentVariantsByChat = new Map<string, string[]>();
+const lastIntentByChat = new Map<string, string>();
 
 app.post("/webhook", async (req, res) => {
   // Responde rapido para a Evolution API nao re-tentar o webhook.
@@ -39,12 +40,15 @@ async function handleIncomingMessage(from: string, text: string): Promise<void> 
 
   const history = recentHistoryByChat.get(from) ?? [];
   const recentVariants = recentVariantsByChat.get(from) ?? [];
+  const lastIntentId = lastIntentByChat.get(from) ?? null;
 
   const { intentId, parts, confidence, usedFallback } = await pickResponse(
     text,
     history,
-    recentVariants
+    recentVariants,
+    lastIntentId
   );
+  lastIntentByChat.set(from, intentId);
 
   for (let i = 0; i < parts.length; i++) {
     const part = parts[i];

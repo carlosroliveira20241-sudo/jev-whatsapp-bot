@@ -118,6 +118,18 @@ export const intents: Intent[] = [
     variants: ["então", "então mano", "deixa eu te contar", "deixa eu te explicar"],
   },
   {
+    id: "reassurance",
+    criteria:
+      "A pessoa esta demonstrando preocupacao genuina com voce - perguntando se esta tudo bem, se voce " +
+      "esta estranho/diferente/mal, ou insistindo depois que voce deu uma resposta evasiva.",
+    variants: [
+      "to de boa sim, só ocupado",
+      "to bem sim, pq?",
+      "tranquilo, só correria aqui",
+      ["relaxa", "to de boa só meio corrido hoje"],
+    ],
+  },
+  {
     id: "asked-if-bot",
     criteria:
       "A pessoa esta perguntando diretamente se voce e um robo, uma IA, um bot, ou duvidando se esta falando com uma pessoa de verdade.",

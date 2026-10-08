@@ -22,13 +22,24 @@ const script = [
   "?",
   "oi tudo bem? o que vc ta fazendo hj",
   "me ajuda com uma coisa rapida, vc consegue fazer uma planilha agora de todas as despesas do projeto, com formula de soma automatica e grafico",
+  "cara vc terminou aquilo que eu te pedi?",
+  "o robo com brações humanoides que anda",
+  "ta tudo bem com vc? vc parece meio robotico",
+  "pera não esta tudo bem com vc?",
 ];
 
 let history: string[] = [];
 let recentVariants: string[] = [];
+let lastIntentId: string | null = null;
 
 for (const msg of script) {
-  const { intentId, parts, confidence, usedFallback } = await pickResponse(msg, history, recentVariants);
+  const { intentId, parts, confidence, usedFallback } = await pickResponse(
+    msg,
+    history,
+    recentVariants,
+    lastIntentId
+  );
+  lastIntentId = intentId;
   const fullReply = parts.join(" | ");
 
   console.log(`VOCE: ${msg}`);

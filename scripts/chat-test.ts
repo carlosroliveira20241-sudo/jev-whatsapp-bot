@@ -8,6 +8,7 @@ const RECENT_VARIANTS_LIMIT = 5;
 
 let history: string[] = [];
 let recentVariants: string[] = [];
+let lastIntentId: string | null = null;
 
 const rl = readline.createInterface({ input, output });
 
@@ -19,7 +20,13 @@ while (true) {
 
   await sleep(readingDelayMs(text));
 
-  const { intentId, parts, confidence, usedFallback } = await pickResponse(text, history, recentVariants);
+  const { intentId, parts, confidence, usedFallback } = await pickResponse(
+    text,
+    history,
+    recentVariants,
+    lastIntentId
+  );
+  lastIntentId = intentId;
 
   for (let i = 0; i < parts.length; i++) {
     await sleep(typingDelayMs(parts[i]));

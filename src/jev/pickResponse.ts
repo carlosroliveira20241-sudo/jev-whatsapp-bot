@@ -18,7 +18,8 @@ function variantText(variant: ResponseVariant): string {
  */
 async function classifyIntent(
   incomingMessage: string,
-  recentHistory: string[]
+  recentHistory: string[],
+  lastIntentId: string | null
 ): Promise<{ intent: Intent; confidence: number; usedFallback: boolean }> {
   const criteria: Record<string, string> = {};
   for (const intent of intents) {
@@ -27,6 +28,16 @@ async function classifyIntent(
 
   const state = [...recentHistory, `Mensagem recebida agora: ${incomingMessage}`].join("\n");
 
+  const repeatNote =
+    lastIntentId === "clarifying-question"
+      ? " Na sua ultima resposta voce pediu esclarecimento/mais detalhe. Se esta mensagem e uma tentativa " +
+        "da pessoa de responder/explicar aquilo, NAO escolha 'clarifying-question' de novo - trate como uma " +
+        "resposta valida (reaja a ela, confirme que entendeu, ou de outra reacao coerente) mesmo que o " +
+        "conteudo em si seja estranho ou incomum."
+      : lastIntentId
+        ? ` Evite escolher a mesma intencao da sua ultima resposta (${lastIntentId}) de novo, a menos que seja claramente a mais adequada.`
+        : "";
+
   const result = await callSystemOne(state, {
     intent: {
       type: "choice",
@@ -34,7 +45,8 @@ async function classifyIntent(
         "Qual e a intencao/contexto da mensagem recebida? Use o historico da conversa acima para " +
         "entender se ela continua um assunto anterior, repete um pedido que ja foi feito, ou contradiz " +
         "algo que ja foi dito - a intencao deve fazer sentido dentro do fluxo da conversa, nao so da " +
-        "ultima frase isolada.",
+        "ultima frase isolada." +
+        repeatNote,
       criteria,
     },
   });
@@ -96,11 +108,13 @@ async function chooseVariant(
 export async function pickResponse(
   incomingMessage: string,
   recentHistory: string[] = [],
-  recentlyUsedVariants: string[] = []
+  recentlyUsedVariants: string[] = [],
+  lastIntentId: string | null = null
 ): Promise<PickResult> {
   const { intent, confidence: intentConfidence, usedFallback } = await classifyIntent(
     incomingMessage,
-    recentHistory
+    recentHistory,
+    lastIntentId
   );
 
   const { variant, confidence: variantConfidence } = await chooseVariant(
