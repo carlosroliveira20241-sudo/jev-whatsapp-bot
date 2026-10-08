@@ -22,6 +22,10 @@ app.post("/webhook", async (req, res) => {
   const incoming = parseIncomingMessage(req.body);
   if (!incoming) return;
 
+  // Trava de seguranca: ignora silenciosamente qualquer conversa que nao seja o
+  // grupo autorizado (DMs pessoais, outros grupos, etc nunca disparam resposta).
+  if (incoming.from !== config.allowedChatId) return;
+
   try {
     await handleIncomingMessage(incoming.from, incoming.text);
   } catch (err) {

@@ -17,6 +17,11 @@ export const config = {
   evolutionApiKey: required("EVOLUTION_API_KEY"),
   evolutionInstance: required("EVOLUTION_INSTANCE"),
 
+  // Trava de seguranca: o bot SO processa mensagens vindas deste JID (grupo especifico).
+  // Qualquer outra conversa (DMs pessoais, outros grupos) e ignorada silenciosamente.
+  // Obrigatorio - sem isso o bot nao responde a nada, por seguranca.
+  allowedChatId: required("ALLOWED_CHAT_ID"),
+
   port: Number(process.env.PORT ?? 3000),
   minConfidence: Number(process.env.MIN_CONFIDENCE ?? 0.4),
 };
