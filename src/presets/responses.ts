@@ -141,9 +141,42 @@ export const intents: Intent[] = [
     variants: ["qual?", "como assim?", "oq exatamente?", "n entendi bem, pode explicar melhor?", "ué, oq?", "n saquei, explica de novo?"],
   },
   {
+    id: "basic-identity-question",
+    criteria:
+      "A pessoa esta perguntando um fato BASICO E OBVIO sobre voce que qualquer pessoa sabe na hora sobre " +
+      "si mesma sem pensar - seu proprio nome, sua idade, se voce estuda ou trabalha em tal lugar, etc. " +
+      "NUNCA trate isso como 'unknown-specific' ou hesite - um humano real responde esse tipo de pergunta " +
+      "na hora, sem duvida, mesmo que ache a pergunta estranha (ja que quem pergunta normalmente ja te " +
+      "conhece nessa conversa).",
+    variants: [
+      "pq vc ta perguntando isso kkkk, já sabe",
+      "oq? vc me conhece mano kkkk",
+      ["kkkkk", "essa é facil, vc já sabe"],
+      "hã, vc já sabe disso kkkk",
+      "kkkkk pra que isso, vc já sabe",
+      ["kkkkk pq a pergunta", "cadê, isso vc já sabe"],
+    ],
+  },
+  {
+    id: "personal-preference-question",
+    criteria:
+      "A pessoa esta perguntando sobre gostos, preferencias ou opinioes pessoais suas (o que voce mais " +
+      "gosta, sua comida favorita, etc) - diferente de um fato objetivo desconhecido, aqui um humano real " +
+      "quase sempre tem alguma resposta vaga, mesmo que nao seja especifica.",
+    variants: [
+      "ah, sei lá, várias coisas",
+      "muitas coisas kkkk não saberia escolher uma só",
+      ["depende do dia kkkk", "mas várias coisas"],
+      "várias paradas, não tenho uma só não",
+      ["sei lá mano", "e vc, curte oq?"],
+    ],
+  },
+  {
     id: "unknown-specific",
     criteria:
-      "Pergunta muito especifica, tecnica, pessoal ou dificil, que exigiria uma informacao que voce nao teria de cabeca.",
+      "Pergunta muito especifica, tecnica, ou dificil sobre OUTRO assunto (nao sobre voce mesmo), que " +
+      "exigiria uma informacao que voce nao teria de cabeca. NAO se aplica a perguntas basicas sobre quem " +
+      "voce e (nome, idade) - essas sao 'basic-identity-question'.",
     variants: [
       "sei lá mano, não tenho certeza não",
       "não sei de cabeça não",
@@ -152,6 +185,7 @@ export const intents: Intent[] = [
       "não sei se consigo te dizer com certeza não",
       "boa pergunta, não faço ideia",
       "pqp n sei não kkkk",
+      ["não sei não", "pq, vc sabe?"],
     ],
   },
   {
@@ -271,6 +305,7 @@ export const intents: Intent[] = [
       ["agora não", "mais tarde eu vejo isso"],
       "não consigo agora não",
       "para de zoeira kkkk não vou fazer isso agora",
+      ["kkkkk não vou não", "pra que vc quer isso?"],
     ],
   },
 ];
