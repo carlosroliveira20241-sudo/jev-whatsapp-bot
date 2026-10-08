@@ -30,7 +30,11 @@ async function classifyIntent(
   const result = await callSystemOne(state, {
     intent: {
       type: "choice",
-      instructions: "Qual e a intencao/contexto da mensagem recebida?",
+      instructions:
+        "Qual e a intencao/contexto da mensagem recebida? Use o historico da conversa acima para " +
+        "entender se ela continua um assunto anterior, repete um pedido que ja foi feito, ou contradiz " +
+        "algo que ja foi dito - a intencao deve fazer sentido dentro do fluxo da conversa, nao so da " +
+        "ultima frase isolada.",
       criteria,
     },
   });
@@ -50,6 +54,8 @@ async function classifyIntent(
  */
 async function chooseVariant(
   intent: Intent,
+  incomingMessage: string,
+  recentHistory: string[],
   recentlyUsedVariants: string[]
 ): Promise<{ variant: ResponseVariant; confidence: number }> {
   if (intent.variants.length === 1) {
@@ -65,13 +71,18 @@ async function chooseVariant(
     ? ` Evite repetir estas variantes usadas recentemente na conversa: ${recentlyUsedVariants.join(" | ")}.`
     : "";
 
-  const state = `Intencao escolhida: ${intent.id}.${avoidNote}`;
+  const state = [
+    ...recentHistory,
+    `Mensagem recebida agora: ${incomingMessage}`,
+    `Intencao escolhida: ${intent.id}.${avoidNote}`,
+  ].join("\n");
 
   const result = await callSystemOne(state, {
     variant: {
       type: "choice",
       instructions:
-        "Qual variante de resposta encaixa melhor agora? Prefira uma diferente das usadas recentemente, para nao parecer repetitivo.",
+        "Qual variante de resposta encaixa melhor no contexto da conversa acima e na mensagem recebida agora? " +
+        "Prefira uma diferente das usadas recentemente, para nao parecer repetitivo.",
       criteria,
     },
   });
@@ -92,7 +103,12 @@ export async function pickResponse(
     recentHistory
   );
 
-  const { variant, confidence: variantConfidence } = await chooseVariant(intent, recentlyUsedVariants);
+  const { variant, confidence: variantConfidence } = await chooseVariant(
+    intent,
+    incomingMessage,
+    recentHistory,
+    recentlyUsedVariants
+  );
 
   const parts = Array.isArray(variant) ? variant : [variant];
 

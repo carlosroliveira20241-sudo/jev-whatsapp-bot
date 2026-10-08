@@ -9,7 +9,7 @@ import { betweenPartsDelayMs, readingDelayMs, sleep, typingDelayMs } from "./tim
 const app = express();
 app.use(express.json());
 
-const HISTORY_LIMIT = 6;
+const HISTORY_LIMIT = 16;
 const RECENT_VARIANTS_LIMIT = 5;
 
 const recentHistoryByChat = new Map<string, string[]>();

@@ -52,8 +52,10 @@ export const intents: Intent[] = [
   },
   {
     id: "agree",
-    criteria: "A mensagem espera uma confirmacao simples, concordancia ou aceite de algo.",
-    variants: ["isso", "sim sim", "pode ser", "blz", "consigo sim", "pode deixar", "fechado", "acredito que sim", "jaé", "é"],
+    criteria:
+      "A mensagem espera uma confirmacao simples, concordancia ou aceite de algo, OU a pessoa esta avisando " +
+      "que ELA MESMA nao pode/vai estar indisponivel e so precisa que voce reconheca, sem pedir nada de voce.",
+    variants: ["isso", "sim sim", "pode ser", "blz", "consigo sim", "pode deixar", "fechado", "acredito que sim", "jaé", "é", "blz, sem problema", "tranquilo, outro dia então"],
   },
   {
     id: "laugh",
@@ -62,7 +64,10 @@ export const intents: Intent[] = [
   },
   {
     id: "busy",
-    criteria: "A pessoa esta convidando para algo, pedindo para fazer algo agora, ou marcando um horario que nao te serve.",
+    criteria:
+      "A pessoa esta te convidando, pedindo pra VOCE fazer algo agora, ou tentando marcar um horario COM " +
+      "voce que nao serve - ou seja, e VOCE quem precisa recusar/adiar. Nao se aplica quando quem nao pode " +
+      "e a propria pessoa que mandou a mensagem.",
     variants: [
       "agora n vou conseguir não, dps te falo",
       ["agora n da não", "mas eu te aviso dps"],
@@ -113,9 +118,33 @@ export const intents: Intent[] = [
     variants: ["então", "então mano", "deixa eu te contar", "deixa eu te explicar"],
   },
   {
+    id: "asked-if-bot",
+    criteria:
+      "A pessoa esta perguntando diretamente se voce e um robo, uma IA, um bot, ou duvidando se esta falando com uma pessoa de verdade.",
+    variants: [
+      "kkkkk que isso mano",
+      "oq? não, pq?",
+      ["kkkkk", "to bugado, pq vc ta perguntando isso"],
+      "para com isso kkkk",
+      ["não", "é so eu mesmo aqui kkkk"],
+    ],
+  },
+  {
     id: "location-check",
-    criteria: "A pessoa esta perguntando onde voce esta, se ja chegou, ou checando seu status/localizacao.",
+    criteria: "A pessoa esta perguntando onde voce esta, se ja chegou, ou checando seu status/localizacao (sem pedir pra voce mandar nada).",
     variants: ["cheguei aqui agora", "to fora, já volto", ["to indo", "chego jaja"], "ainda to naquele lugar, mas jaja saio"],
+  },
+  {
+    id: "online-check",
+    criteria: "A pessoa esta perguntando se voce esta online, disponivel agora, ou se pode falar/ver uma coisa agora.",
+    variants: ["to sim, pq?", "to on, fala", "posso sim, fala", ["to aqui", "pq, o que foi?"]],
+  },
+  {
+    id: "declined-request",
+    criteria:
+      "A pessoa esta pedindo pra voce mandar algo especifico agora (localizacao, arquivo, foto, documento, " +
+      "planilha) que voce nao vai fazer nesse momento.",
+    variants: ["agora não dá não", "depois eu te mando", ["agora não", "mais tarde eu vejo isso"], "não consigo agora não"],
   },
 ];
 
