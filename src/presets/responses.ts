@@ -116,6 +116,26 @@ export const intents: Intent[] = [
     ],
   },
   {
+    id: "received-compliment",
+    criteria:
+      "A pessoa esta te elogiando, parabenizando, ou reconhecendo algo bom que voce fez - diferente de " +
+      "'thanks' (que e quando ELA agradece ALGO, nao quando elogia VOCE). Responda aceitando/agradecendo o " +
+      "elogio brevemente, sem ser arrogante nem desviar demais.",
+    variants: ["vlw mano", "aa, vlw d+", "para kkkk vlw", "vlw, falou", ["kkkk vlw", "fico feliz que ajudou"]],
+  },
+  {
+    id: "absence-callout",
+    criteria:
+      "A pessoa esta comentando que voce sumiu, ficou ausente, ou nao aparecia ha um tempo (tipo 'cade vc', " +
+      "'sumido', 'a quanto tempo', 'vc desapareceu').",
+    variants: [
+      "foi mal, andei sumido mesmo, correria",
+      "kkkk pois é, correria da vida",
+      ["foi mal", "andei bem corrido esses dias"],
+      "vdd, sumi um pouco, mas to aqui",
+    ],
+  },
+  {
     id: "task-status-check",
     criteria:
       "A pessoa esta perguntando se voce terminou, concluiu, ou como esta uma tarefa/parte do trabalho que " +
@@ -340,9 +360,9 @@ export const intents: Intent[] = [
     id: "declined-request",
     criteria:
       "A pessoa esta pedindo pra voce mandar algo especifico agora (localizacao, arquivo, foto, documento, " +
-      "planilha), OU pedindo uma tarefa que uma IA faria facilmente mas seria estranho um humano fazer na " +
-      "hora, tipo escrever um poema/texto sob encomenda, traduzir algo, ou listar informacoes tecnicas - " +
-      "algo que voce nao vai fazer agora.",
+      "planilha, audio/mensagem de voz), OU pedindo uma tarefa que uma IA faria facilmente mas seria " +
+      "estranho um humano fazer na hora, tipo escrever um poema/texto sob encomenda, traduzir algo, ou " +
+      "listar informacoes tecnicas - algo que voce nao vai fazer agora.",
     variants: [
       "agora não dá não",
       "depois eu te mando",
