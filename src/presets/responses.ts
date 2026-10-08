@@ -59,6 +59,32 @@ export const intents: Intent[] = [
     ],
   },
   {
+    id: "seen-it-check",
+    criteria:
+      "A pessoa esta perguntando se voce VIU algo especifico (mensagem, arquivo, aviso, link, foto) que foi " +
+      "compartilhado em algum lugar - uma pergunta direta tipo 'vc viu X?', nao uma pergunta ambigua.",
+    variants: [
+      "não vi não",
+      "ainda não vi não",
+      ["não", "vou dar uma olhada"],
+      "vi sim",
+      "ainda não, só de relance",
+    ],
+  },
+  {
+    id: "task-status-check",
+    criteria:
+      "A pessoa esta perguntando se voce terminou, concluiu, ou como esta uma tarefa/parte do trabalho que " +
+      "ficou de fazer.",
+    variants: [
+      "quase, falta só um pouco",
+      "ainda não terminei não, mas to nisso",
+      ["ainda não", "mas to quase"],
+      "terminei sim",
+      "falta só ajustar um detalhe",
+    ],
+  },
+  {
     id: "whats-up",
     criteria: "A pessoa esta perguntando o que voce esta fazendo agora ou como estao as coisas.",
     variants: [
@@ -73,7 +99,7 @@ export const intents: Intent[] = [
     criteria:
       "A mensagem espera uma confirmacao simples, concordancia ou aceite de algo, OU a pessoa esta avisando " +
       "que ELA MESMA nao pode/vai estar indisponivel e so precisa que voce reconheca, sem pedir nada de voce.",
-    variants: ["isso", "sim sim", "pode ser", "blz", "consigo sim", "pode deixar", "fechado", "acredito que sim", "jaé", "é", "blz, sem problema", "tranquilo, outro dia então"],
+    variants: ["isso", "sim sim", "pode ser", "blz", "consigo sim", "pode deixar", "fechado", "acredito que sim", "jaé", "é", "blz, sem problema", "tranquilo"],
   },
   {
     id: "laugh",
@@ -130,7 +156,10 @@ export const intents: Intent[] = [
   },
   {
     id: "interrupted",
-    criteria: "A pessoa esta apressando voce, ou voce precisa explicar que teve que pausar/resolver algo no meio da conversa.",
+    criteria:
+      "A pessoa esta apressando voce de forma explicita (tipo 'anda logo', 'vamo rapido', 'calma ai'), " +
+      "ou voce precisa explicar que teve que pausar/resolver algo no meio da propria conversa de agora. " +
+      "NAO se aplica a cobranças de prazo/deadline de projeto em geral - isso e outra coisa.",
     variants: [
       "calma kkkk",
       "foi mal, tive que parar pra resolver uma parada aqui",
@@ -141,8 +170,39 @@ export const intents: Intent[] = [
   },
   {
     id: "about-to-explain",
-    criteria: "Voce esta prestes a comecar a explicar ou contar algo em detalhe.",
+    criteria:
+      "A pessoa esta pedindo PRA VOCE contar/explicar algo agora (tipo 'conta o que rolou', 'fala sobre " +
+      "isso', 'me explica'). NAO se aplica quando a propria pessoa esta te explicando, dando contexto, ou " +
+      "respondendo uma pergunta sua - nesse caso trate como reconhecimento/entendimento, nao como voce indo " +
+      "explicar algo.",
     variants: ["então", "então mano", "deixa eu te contar", "deixa eu te explicar", "bom"],
+  },
+  {
+    id: "deadline-push",
+    criteria:
+      "A pessoa esta cobrando prazo, pedindo pra apressar uma entrega, lembrando que o prazo esta proximo, " +
+      "ou comentando que esta correndo/com pressa por causa de um prazo - pressao de tempo sobre uma tarefa, " +
+      "sem ser um pedido de pausa na conversa.",
+    variants: [
+      "bora, to tentando terminar",
+      "pode deixar, vou dar conta",
+      ["relaxa", "vai sair a tempo"],
+      "eu sei, ja to correndo aqui",
+      "bora la, vamo que vamo",
+    ],
+  },
+  {
+    id: "empathy",
+    criteria:
+      "A pessoa esta compartilhando algo negativo sobre o ESTADO DELA MESMA (cansaço, ansiedade, dia ruim, " +
+      "problema pessoal) e espera um gesto de empatia/apoio seu, sem estar pedindo nada especifico.",
+    variants: [
+      "poxa, forte isso",
+      "relaxa, vai passar",
+      ["eita", "sinto muito mano"],
+      "bem chato isso mesmo",
+      "aff, foi mal por isso",
+    ],
   },
   {
     id: "reassurance",
