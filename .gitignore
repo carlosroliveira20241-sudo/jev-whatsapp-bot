@@ -1,0 +1,7 @@
+node_modules/
+dist/
+.env
+*.log
+evolution-data/
+conversation-logs/
+qrcode.png
