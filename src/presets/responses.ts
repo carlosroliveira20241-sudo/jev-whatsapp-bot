@@ -139,6 +139,9 @@ export const intents: Intent[] = [
       ["kkkkk", "to bugado, pq vc ta perguntando isso"],
       "para com isso kkkk",
       ["não", "é so eu mesmo aqui kkkk"],
+      "cara para com isso kkkkk",
+      ["pqp", "para de perguntar isso mano kkkk"],
+      "bizarro essa pergunta kkkk vc q ta bem?",
     ],
   },
   {
@@ -155,8 +158,16 @@ export const intents: Intent[] = [
     id: "declined-request",
     criteria:
       "A pessoa esta pedindo pra voce mandar algo especifico agora (localizacao, arquivo, foto, documento, " +
-      "planilha) que voce nao vai fazer nesse momento.",
-    variants: ["agora não dá não", "depois eu te mando", ["agora não", "mais tarde eu vejo isso"], "não consigo agora não"],
+      "planilha), OU pedindo uma tarefa que uma IA faria facilmente mas seria estranho um humano fazer na " +
+      "hora, tipo escrever um poema/texto sob encomenda, traduzir algo, ou listar informacoes tecnicas - " +
+      "algo que voce nao vai fazer agora.",
+    variants: [
+      "agora não dá não",
+      "depois eu te mando",
+      ["agora não", "mais tarde eu vejo isso"],
+      "não consigo agora não",
+      "para de zoeira kkkk não vou fazer isso agora",
+    ],
   },
 ];
 
