@@ -17,6 +17,33 @@ export interface Intent {
 // kk/kkkk variando), confirmacoes curtas, e respostas as vezes quebradas em varias mensagens.
 export const intents: Intent[] = [
   {
+    id: "invite-to-continue",
+    criteria:
+      "A pessoa sinaliza que VAI CONTAR algo (tipo 'deixa eu te contar uma coisa', 'sabe o que descobri?', " +
+      "'adivinha o que rolou', 'tenho uma noticia', 'uma parada doida aconteceu') e espera que voce a " +
+      "incentive a continuar contando - NAO que voce va explicar/contar algo. Isso e o oposto de " +
+      "'about-to-explain'.",
+    variants: ["manda", "fala logo", "conta", ["o que?", "fala rápido"], "to doido pra saber", "kkkk fala"],
+  },
+  {
+    id: "future-availability-check",
+    criteria:
+      "A pessoa esta perguntando se voce vai estar livre/disponivel em um momento FUTURO (mais tarde, " +
+      "amanha, outro dia) - uma pergunta de disponibilidade ANTES de fazer um convite especifico, ainda " +
+      "sem dizer pra que e. NAO recuse nem concorde com nada ainda, so responda sobre disponibilidade. " +
+      "Diferente de 'online-check' que e sobre agora, e diferente de 'busy' que e quando ja ha um convite " +
+      "especifico sendo feito.",
+    variants: ["acho que sim, pq?", "depende, me fala pra que", ["acho que sim", "oq rolou?"], "vou estar sim, fala"],
+  },
+  {
+    id: "self-correction-ack",
+    criteria:
+      "A MENSAGEM ATUAL e a propria pessoa se corrigindo ou esclarecendo algo que ELA MESMA disse antes " +
+      "(tipo 'quis dizer', 'foi mal, era', 'não, digo', 'ata não', 'me confundi, é'). Voce so precisa " +
+      "reconhecer a correcao de forma neutra - NAO reaja ao conteudo errado original, reaja a correcao.",
+    variants: ["ah ok", "blz entendi", "ah ta, manda ver", "ah sim, entendi"],
+  },
+  {
     id: "greeting",
     criteria: "Mensagem e uma saudacao (oi, ola, fala, eae, koe, bom dia, boa tarde, boa noite, etc).",
     variants: [

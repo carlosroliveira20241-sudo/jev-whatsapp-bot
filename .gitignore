@@ -5,3 +5,4 @@ dist/
 evolution-data/
 conversation-logs/
 qrcode.png
+.live-test-state.json
